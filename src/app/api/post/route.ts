@@ -20,3 +20,31 @@ export async function GET(request: NextRequest) {
 
   return response;
 }
+
+export async function POST(request: NextRequest) {
+  try {
+      const body = await request.json();
+      const { title, content, postUserId } = body;
+
+      
+      const validation = postSchema.safeParse(body);
+
+      if (!validation.success) {
+          const errorMessage = validation.error.errors[0].message;
+          return NextResponse.json({ message: errorMessage }, { status: 400 });
+      }
+
+      const newPost = await db.post.create({
+          data: {
+              title,
+              content,
+              postUserId
+          }
+      });
+
+      return NextResponse.json({ post: newPost, message: 'Post created successfully' }, { status: 201 });
+  } catch (error) {
+      console.error('Error creating post:', error);
+      return NextResponse.json({ message: 'Something went wrong' }, { status: 500 });
+  }
+}

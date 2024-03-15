@@ -22,8 +22,7 @@ export default async function RootLayout({
 }>) {
   let session = null;
   try {
-    session = await getServerSession();
-    console.log("Session data in RootLayout:", session);
+    session = await getServerSession(); 
   } catch (error) {
     console.error("Error fetching user session:", error);
   }
@@ -33,7 +32,7 @@ export default async function RootLayout({
         <AuthProvider>
           <div className="flex flex-col min-h-screen">
             {session && (
-              <nav className="bg-gray-900 text-white p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50">
+              <nav className="bg-slate-950 text-white p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50">
                 <div>
                   <Link href="/dashboard" className="text-lg font-semibold">
                     Simple Blog
@@ -46,10 +45,7 @@ export default async function RootLayout({
               </nav>
             )}
             <main className="flex-grow">{children}</main>
-            <footer className="text-white absolute bottom-0 right-0 p-4">
-              <p>&copy; 2024 Simple Blog. Created by Jade Japhet R. Rugas</p>
-            </footer>
-          </div>
+          </div> 
         </AuthProvider>
       </body>
     </html>
