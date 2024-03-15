@@ -48,3 +48,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'Something went wrong' }, { status: 500 });
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    // Delete all reactions
+    await db.post.deleteMany({});
+
+    return NextResponse.json(
+      { message: 'All post deleted successfully' },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error('Error deleting reactions:', error);
+    return NextResponse.json(
+      { message: 'Internal Server Error' },
+      { status: 500 }
+    );
+  }
+}

@@ -77,11 +77,11 @@ export const options: NextAuthOptions = {
   callbacks: {
     session: async ({ session, token }: SessionProps) => {
       if (session?.user) {
-        try {
-          //
+        try { 
           const user = await db.user.findUnique({
             where: { email: session.user.email },
             select: {
+              id: true,
               firstName: true,
               lastName: true,
               birthday: true,
@@ -92,6 +92,7 @@ export const options: NextAuthOptions = {
           }); 
 
           if (user) { 
+            session.user.id = user.id;
             session.user.firstName = user.firstName;
             session.user.lastName = user.lastName;
             session.user.birthday = user.birthday;
