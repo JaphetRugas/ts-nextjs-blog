@@ -180,7 +180,9 @@ export default function PostPage({
                 </button>
               </form>
               <div>
-                <h2 className="text-xl font-semibold mb-4">Comments</h2>
+                <h2 className="text-xl font-semibold mb-4">
+                  Comments <small>({post.postComments.length}) </small>
+                </h2>
                 {post.postComments.map((comment, index) => (
                   <div key={index} className="bg-gray-700 p-4 rounded-lg mb-4">
                     <p className="text-gray-300">{comment.content}</p>
