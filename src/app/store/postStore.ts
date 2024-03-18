@@ -35,7 +35,9 @@ type PostListState = {
   handleCommentSubmit: (
     postId: number,
     content: string,
-    userId: string | undefined
+    userId: string | undefined,
+    commenterFirstName: string,
+    commenterLastName: string
   ) => void;
 };
 
@@ -90,7 +92,13 @@ export const usePostListStore = create<PostListState>((set) => ({
       set({ loading: false });
     }
   },
-  handleCommentSubmit: async (postId, content, userId) => {
+  handleCommentSubmit: async (
+    postId,
+    content,
+    userId,
+    commenterFirstName,
+    commenterLastName
+  ) => {
     try {
       const response = await fetch(`/api/post/${postId}/comment`, {
         method: "POST",
@@ -101,13 +109,19 @@ export const usePostListStore = create<PostListState>((set) => ({
       });
 
       if (response.ok) {
-        const data = await response.json(); 
+        const newComment = await response.json();
+        newComment.commentUser = {
+          firstName: commenterFirstName,
+          lastName: commenterLastName,
+        };
+
         set((state) => ({
-          posts: state.posts.map((post) =>
-            post.id === postId
-              ? { ...post, postComments: [...post.postComments, data] }
-              : post
-          ),
+          post: state.post
+            ? {
+                ...state.post,
+                postComments: [...state.post.postComments, newComment],
+              }
+            : state.post,
         }));
       } else {
         console.error("Failed to add comment");

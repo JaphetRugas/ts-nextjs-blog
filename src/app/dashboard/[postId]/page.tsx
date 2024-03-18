@@ -146,13 +146,15 @@ export default function PostPage({
               <form
                 className="mb-6"
                 onSubmit={(e) => {
-                  e.preventDefault(); 
+                  e.preventDefault();
                   handleCommentSubmit(
                     post.id,
                     e.target.comment.value,
                     session?.user?.id,
+                    session?.user?.firstName,
+                    session?.user?.lastName
                   );
-                  e.target.comment.value = "";  
+                  e.target.comment.value = "";
                 }}
               >
                 <h2 className="text-xl font-semibold mb-4">Add Comment</h2>
@@ -185,8 +187,13 @@ export default function PostPage({
                     <div className="flex justify-between items-center mt-2">
                       <div className="text-gray-400">
                         <p>
-                          Commented by: {comment.commentUser.firstName}{" "}
-                          {comment.commentUser.lastName}
+                          Commented by:{" "}
+                          {comment.commentUser?.firstName
+                            ? comment.commentUser.firstName
+                            : "Unknown"}{" "}
+                          {comment.commentUser?.lastName
+                            ? comment.commentUser.lastName
+                            : ""}
                         </p>
                         <p>Created at: {formatDate(comment.createdAt)}</p>
                       </div>
