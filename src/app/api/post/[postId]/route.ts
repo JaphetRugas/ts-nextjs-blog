@@ -18,6 +18,7 @@ export async function GET(request: NextRequest, { params }: Props) {
             commentUser: true,
           },
         },
+        postReactions: true,
       },
     });
 

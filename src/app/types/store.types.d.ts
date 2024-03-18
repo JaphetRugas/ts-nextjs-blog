@@ -14,3 +14,18 @@ declare module 'next-auth' {
     };
   }
 }
+
+type Post = {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
+  expanded: boolean;
+  postUser: {
+    firstName: string;
+    lastName: string;
+  };
+  postComments: any[];
+  postReactions: any[];
+  isLiked: boolean;
+}

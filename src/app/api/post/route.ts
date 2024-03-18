@@ -11,7 +11,8 @@ export async function GET(request: NextRequest) {
         include: {
           commentUser: true,  
         },
-      },
+      }, 
+      postReactions: true,
     },
   });
 

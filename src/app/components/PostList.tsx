@@ -1,16 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 import { usePostListStore } from "../store/postStore";
 import Skeleton from "@mui/material/Skeleton";
 import { Typography } from "@mui/material";
-import Link from "next/link";
+import Link from "next/link"; 
+import PostReactionHandler from "./PostReactionHandler";
 
 const MAX_CONTENT_LENGTH = 300;
 
 const PostList = () => {
-  const { posts, setPosts, handleReaction, toggleExpand} =
-    usePostListStore();
+  const { posts, setPosts, toggleExpand } = usePostListStore();
 
   const [isLoading, setLoading] = useState<boolean>(true);
 
@@ -21,7 +20,7 @@ const PostList = () => {
       month: "long",
       day: "numeric",
     });
-  }; 
+  };
 
   const truncateContent = (content: string | any[], expanded: boolean) => {
     if (expanded || content.length <= MAX_CONTENT_LENGTH) {
@@ -47,7 +46,7 @@ const PostList = () => {
       }
     };
     fetchPosts();
-  }, []);
+  }, []);  
 
   return (
     <div className="w-full">
@@ -88,16 +87,9 @@ const PostList = () => {
               </button>
             )}
             <div className="flex items-center mt-4">
-              <button
-                onClick={() => handleReaction(post.id)}
-                className="text-white mr-4"
-              >
-                {post.isLiked ? <IoHeartSharp /> : <IoHeartOutline />}
-              </button>
-              <Link
-                href={`/dashboard/${post.id}`}
-                className="text-white"
-              > 
+            <PostReactionHandler post={post} />
+              {"  "}
+              <Link href={`/dashboard/${post.id}`} className="text-white">
                 View Comments ({post.postComments.length})
               </Link>
             </div>

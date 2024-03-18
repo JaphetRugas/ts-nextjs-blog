@@ -126,10 +126,22 @@ export default function PostPage({
               <div className="flex items-center mb-2">
                 <button
                   onClick={() => handleReaction(post.id)}
-                  className="text-white mr-4"
+                  className="text-white"
                 >
                   {post.isLiked ? <IoHeartSharp /> : <IoHeartOutline />}
                 </button>
+
+                {post && post.postReactions && (
+                  <span className="mr-4">
+                    (
+                    {
+                      post.postReactions.filter((reaction) => reaction.isLiked)
+                        .length
+                    }
+                    )
+                  </span>
+                )}
+
                 <p className="text-gray-400">
                   Posted by: {post.postUser?.firstName}{" "}
                   {post.postUser?.lastName}

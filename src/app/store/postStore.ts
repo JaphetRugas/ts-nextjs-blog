@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { create } from "zustand";
-
-type Post = {
+ 
+type Post = { 
   length: ReactNode;
   id: number;
   title: string;
@@ -13,6 +13,7 @@ type Post = {
     lastName: string;
   };
   postComments: any[];
+  postReactions: any[];
   isLiked: boolean;
 };
 
@@ -20,14 +21,12 @@ type PostListState = {
   posts: Post[];
   post: Post | null;
   newPostTitle: string;
-  newPostContent: string;
-  userId: string | undefined;
+  newPostContent: string; 
   loading: boolean;
   setPost: (post: Post | null) => void;
   setPosts: (posts: Post[]) => void;
   setNewPostTitle: (title: string) => void;
-  setNewPostContent: (content: string) => void;
-  setUserId: (userId: string | undefined) => void;
+  setNewPostContent: (content: string) => void; 
   setLoading: (loading: boolean) => void;
   handleReaction: (postId: number) => void;
   toggleExpand: (postId: number) => void;
@@ -45,14 +44,12 @@ export const usePostListStore = create<PostListState>((set) => ({
   posts: [],
   post: null,
   newPostTitle: "",
-  newPostContent: "",
-  userId: undefined,
+  newPostContent: "", 
   loading: true,
   setPost: (post) => set({ post }),
   setPosts: (posts) => set({ posts }),
   setNewPostTitle: (title) => set({ newPostTitle: title }),
-  setNewPostContent: (content) => set({ newPostContent: content }),
-  setUserId: (userId) => set({ userId }),
+  setNewPostContent: (content) => set({ newPostContent: content }), 
   setLoading: (loading) => set({ loading }),
   handleReaction: (postId) => {},
   toggleExpand: (postId) => {
@@ -82,7 +79,10 @@ export const usePostListStore = create<PostListState>((set) => ({
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const newPost = await response.json();
+        set((state) => ({
+          posts: [newPost, ...state.posts],  
+        }));
       } else {
         console.error("Failed to create post");
       }
