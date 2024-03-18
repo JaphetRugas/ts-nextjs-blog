@@ -4,11 +4,12 @@ import { IoHeartOutline, IoHeartSharp } from "react-icons/io5";
 import { usePostListStore } from "../store/postStore";
 import Skeleton from "@mui/material/Skeleton";
 import { Typography } from "@mui/material";
+import Link from "next/link";
 
 const MAX_CONTENT_LENGTH = 300;
 
 const PostList = () => {
-  const { posts, setPosts, handleReaction, toggleExpand, handleViewComments } =
+  const { posts, setPosts, handleReaction, toggleExpand} =
     usePostListStore();
 
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -20,7 +21,7 @@ const PostList = () => {
       month: "long",
       day: "numeric",
     });
-  };
+  }; 
 
   const truncateContent = (content: string | any[], expanded: boolean) => {
     if (expanded || content.length <= MAX_CONTENT_LENGTH) {
@@ -70,7 +71,7 @@ const PostList = () => {
           <div key={post.id} className="mb-8">
             <h1 className="text-4xl font-bold mb-2">{post.title}</h1>
             <p className="text-gray-400 mb-2">
-              Posted by: {post.postUser.firstName} {post.postUser.lastName}
+              Posted by: {post.postUser?.firstName} {post.postUser?.lastName}
             </p>
             <p className="text-gray-400 mb-4">
               Created at: {formatDate(post.createdAt)}
@@ -93,12 +94,12 @@ const PostList = () => {
               >
                 {post.isLiked ? <IoHeartSharp /> : <IoHeartOutline />}
               </button>
-              <button
-                onClick={() => handleViewComments(post)}
+              <Link
+                href={`/dashboard/${post.id}`}
                 className="text-white"
-              >
+              > 
                 View Comments ({post.postComments.length})
-              </button>
+              </Link>
             </div>
             <hr className="my-8 border-t border-gray-700" />
           </div>

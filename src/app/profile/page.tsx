@@ -1,5 +1,4 @@
-import React from 'react';
-import UserInfo from '../components/UserInfo'; 
+import React from 'react'; 
 import Image from 'next/image';
 import { getServerSession } from 'next-auth';
 import { options } from '../api/auth/[...nextauth]/options';
@@ -21,8 +20,7 @@ export default async function Profile() {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen relative"> 
-      <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center">
-        <UserInfo />
+      <div className="container mx-auto px-4 py-8 flex flex-col items-center justify-center"> 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
           <div className="bg-gray-800 rounded-lg shadow-md p-6">
             <div className="text-center mb-6">
@@ -49,7 +47,7 @@ export default async function Profile() {
                 {birthdayString}
               </p>
               <p className="mb-2">
-                <span className="font-semibold">Joined on:</span>{' '}
+                <span className="font-semibold">Joined at:</span>{' '}
                 {createdAtString}
               </p>
             </div>

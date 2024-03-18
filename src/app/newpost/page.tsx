@@ -23,6 +23,12 @@ export default function NewPost() {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+
+    if (!id) {
+      console.error("User ID is not available.");
+      return;
+    }
+  
     await handlePostSubmit(id);
     setTimeout(() => {
       setNewPostTitle("");

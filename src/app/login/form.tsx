@@ -70,14 +70,14 @@ export default function Form() {
                 Login
               </button>
             </div>
-            <div className="text-center mb-0">
+            <div className="text-center mb-0 text-gray-200">
               Is this your first time here?{" "}
               <Link
-                className="text-sm align-baseline text-white hover:text-green-500"
+                className="text-sm align-baseline text-blue-500 hover:underline"
                 href="/register"
               >
                 Sign Up
-              </Link>
+              </Link> 
             </div>
           </form>
         </div>
