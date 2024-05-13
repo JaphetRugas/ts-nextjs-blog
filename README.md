@@ -6,15 +6,7 @@
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-
-## Features
-- **TypeScript**: Utilizes TypeScript for static typing and enhanced developer experience.
-- **Next.js**: Leverages the power of Next.js for server-side rendering, static site generation, and routing.
-- **Markdown Support**: Allows writing blog posts in Markdown format for easy formatting.
-- **Responsive Design**: Ensures the blog is accessible and looks great across various devices and screen sizes.
-- **SEO Optimized**: Implements SEO best practices to improve search engine visibility and ranking.
-- **Customization**: Easily customizable to fit your specific requirements and design preferences.
-
+ 
 ## Setup
 To run this project locally, follow these steps:
 
